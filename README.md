@@ -77,7 +77,7 @@ Mac OS での動作確認は行ってますが、Windowsでは動作確認はし
 まずは、ターミナルを起動し、開発を行うディレクトリで、このリポジトリをcloneして下さい。
 
 ```
-git clone
+git clone https://gitlab.com/shibajuku/template/orelop-cli-use-javascript.git
 ```
 
 ### 必要なパッケージをインストール
