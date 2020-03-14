@@ -1,0 +1,9 @@
+@charset 'UTF-8';
+/*
+  Heading
+*/
+.c-heading {
+  $font-size: 20px;
+  font-size: set-size($font-size);
+  margin-bottom: set-size(16px, $font-size);
+}

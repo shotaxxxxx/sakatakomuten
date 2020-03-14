@@ -1,0 +1,25 @@
+@charset 'UTF-8';
+//====================================
+//  Break
+//====================================
+
+/*
+  Break
+*/
+.u-break {
+  .-sp {
+    display: inline-block;
+
+    @include mq(tab) {
+      display: none;
+    }
+  }
+
+  .-tab {
+    display: none;
+
+    @include mq(tab) {
+      display: inline-block;
+    }
+  }
+}

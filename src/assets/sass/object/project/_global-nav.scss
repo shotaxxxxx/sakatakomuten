@@ -1,0 +1,48 @@
+@charset 'UTF-8';
+/*
+  Global Nav
+*/
+$position: right; // right or left
+
+// position
+$translate: 110%;
+$shadow-position: -1px;
+$left: auto;
+$right: 0;
+@if $position == left {
+  $translate: -110%;
+  $shadow-position: 2px;
+  $left: 0;
+  $right: auto;
+}
+
+.p-globalNav {
+  position: fixed;
+  top: 0;
+  right: $right;
+  bottom: 0;
+  left: $left;
+  z-index: 1;
+  padding: 3em 0 0;
+  width: 100%;
+  height: 120%;
+  background-color: $main-color;
+  box-shadow: $shadow-position 0 4px rgba(0, 0, 0, .16);
+  transition: transform .3s ease-in-out;
+  transform: translateX($translate);
+}
+
+.is-drawerActive .p-globalNav {
+  transform: translateX(0);
+}
+
+@include mq(tab) {
+  .p-globalNav {
+    position: static;
+    width: 100%;
+    height: auto;
+    box-shadow: none;
+    background-color: transparent;
+    transform: translateX(0);
+  }
+}

@@ -1,0 +1,49 @@
+@charset 'UTF-8';
+@import "color-book";
+
+// -----------------------------------
+//  Layout Settings
+//------------------------------------
+
+// Contentの幅
+$content-width: 1200px !default;
+
+// ブレークポイント
+$breakpoints: (
+  "sp": 340px,
+  "tab": 768px,
+  "lap": 1024px,
+  "desk": 1200px,
+  "vr": 1024px
+) !default;
+
+//====================================
+//  Color Setings
+//====================================
+
+// ベースカラー
+$base-color: #fff;
+
+// メインカラー
+$main-color: #9dbf4a;
+
+// サブカラー
+$sub-color: $md-blue-grey-500;
+
+//　アクセントカラー
+$accent-color: $md-amber-500;
+
+// テキストの色
+$primary-text-color: #212121;
+
+// セカンダリーカラー
+$secondary-text-color: $md-blue-grey-500;
+
+
+//====================================
+//  Typeface
+//====================================
+
+$font-set-primary: "游ゴシック", "Yu Gothic",
+  "游ゴシック体", "YuGothic", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",
+  "Meiryo UI", "メイリオ", Meiryo, sans-serif;
