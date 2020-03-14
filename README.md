@@ -62,6 +62,9 @@ babelを利用してES5にトランスパイルしています。
 
 JSもCSSと同様で、開発用にコンパイルする際は、ソースマップを出力し、リリース用にコンパイルする際は、webpackによって、ファイルの圧縮を行います。
 
+### 画像
+画像ファイルは、`imagemin-mozjpeg`、`imagemin-pngquant`、`imagemin-gifsicle`、`imagemin-svgo`を使って、圧縮を行います。
+
 
 
 ## 必要な環境
