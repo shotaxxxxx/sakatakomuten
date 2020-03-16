@@ -63,7 +63,13 @@ babelを利用してES5にトランスパイルしています。
 JSもCSSと同様で、開発用にコンパイルする際は、ソースマップを出力し、リリース用にコンパイルする際は、webpackによって、ファイルの圧縮を行います。
 
 ### 画像
-画像ファイルは、`imagemin-mozjpeg`、`imagemin-pngquant`、`imagemin-gifsicle`、`imagemin-svgo`を使って、圧縮を行います。
+画像ファイルは、
+- `imagemin-mozjpeg`
+- `imagemin-pngquant`
+- `imagemin-gifsicle`
+- `imagemin-svgo`
+
+を使って、圧縮を行います。
 
 
 
@@ -80,7 +86,7 @@ Mac OS での動作確認は行ってますが、Windowsでは動作確認はし
 まずは、ターミナルを起動し、開発を行うディレクトリで、このリポジトリをcloneして下さい。
 
 ```
-git clone https://gitlab.com/shibajuku/template/orelop-cli-use-javascript.git
+git clone https://gitlab.com/shibajuku/template/orelop-cli.git
 ```
 
 ### 必要なパッケージをインストール
@@ -146,6 +152,11 @@ orelop
 │　│ │ ├ img.svg
 │　│ │ └ img.gif
 │　│ │
+│　├ config
+│　│ ├ mysql
+│　│ ├ nginx
+│　│ └ php
+│　│ │
 │　│ ├ js
 │　│ │ └ main.bundle.js
 │　│ │
@@ -178,6 +189,7 @@ orelop
 ├ babel.config
 ├ bs.config.js
 ├ copy.config.js
+├ docker-compose.yml
 ├ imagemin.js
 ├ postcss.config.js
 ├ webpack.common.js
