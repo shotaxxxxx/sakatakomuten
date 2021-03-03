@@ -1,0 +1,14 @@
+-
+  const dateNow = Date.now();
+  const page = {
+    siteName: 'Shibajuku',
+    siteUrl: 'https://shibajuku.net/',
+    title: 'Webクリエーター養成所 Shibajuku',
+    description: '',
+    image: 'ttps://shibajuku.net/assets/img/common/ogp.png'
+  };
+
+include inc/header.pug
+main#main.l-main.p-main
+  h1 #{page.title}
+include inc/footer.pug

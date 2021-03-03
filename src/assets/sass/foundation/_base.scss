@@ -2,11 +2,17 @@
 /*
   Base
 -----------------------------------------------------*/
-
 body {
   font-family: $font-set-primary;
 }
 
 a {
-  transition: all 0.3s ease-in-out;
+  transition-duration: 0.3s;
+  transition-property: color, background, border;
+  transition-timing-function: $easing;
+
+  &::before,
+  &::after {
+    transition: inherit;
+  }
 }

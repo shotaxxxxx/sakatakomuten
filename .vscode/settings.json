@@ -1,0 +1,6 @@
+{
+  "[sass]": {
+    "prettier.enable": false
+  },
+  "stylelint.stylelintPath": "./node_modules/stylelint/"
+}
