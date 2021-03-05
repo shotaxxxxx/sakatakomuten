@@ -1,14 +1,37 @@
--
-  const dateNow = Date.now();
-  const page = {
-    siteName: 'Shibajuku',
-    siteUrl: 'https://shibajuku.net/',
-    title: 'Webクリエーター養成所 Shibajuku',
-    description: '',
-    image: 'ttps://shibajuku.net/assets/img/common/ogp.png'
-  };
+extends layout/_main
 
-include inc/header.pug
-main#main.l-main.p-main
-  h1 #{page.title}
-include inc/footer.pug
+block append config
+  //- ===========================================
+  //-   ページの設定
+  //- ===========================================
+  -
+    const page = {
+      title: `${SITE_NAME} | 〇〇〇〇`,
+      description: '各ページ固有の説明文を124文字程度で',
+      path: ROOT_PATH,
+      image: SITE_URL + 'OGP画像のファイルパス'
+    }
+
+block append head
+  //- ===========================================
+  //-   ページ用のスタイルやスクリプト
+  //- ===========================================
+
+
+block mainContent
+  //- ===========================================
+  //-   メインコンテンツ
+  //- ===========================================
+  .p-hero
+    .l-container
+      p.p-hero__title #{SITE_NAME}
+
+  section.l-spacer
+    .l-container
+      h2.c-heading #{SITE_NAME}
+
+
+block script
+  //- ===========================================
+  //-   エンベッドのスクリプト
+  //- ===========================================
