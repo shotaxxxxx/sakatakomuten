@@ -1,4 +1,4 @@
-export const dropdown = function (elem) {
+export const dropdown = function(elem) {
   const targets = document.querySelectorAll(elem);
   const activeClasss = "is-dropdownActive";
 
@@ -12,7 +12,7 @@ export const dropdown = function (elem) {
     document.documentElement.classList.remove("is-overlayActive");
   }
 
-  targets.forEach((target) => {
+  targets.forEach(target => {
     target.parentNode.addEventListener("mouseover", openDropdown, { passive: true });
     target.parentNode.addEventListener("mouseleave", closeDropdown, { passive: true });
     target.addEventListener("focus", openDropdown, { passive: true });

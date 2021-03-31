@@ -1,8 +1,7 @@
-const path = require('path');
-const webpackMerge = require('webpack-merge');
-const commonConf = require('./webpack.common');
+const { merge } = require("webpack-merge");
+const common = require("./webpack.common.js");
 
-module.exports = () => webpackMerge(commonConf(), {
+module.exports = merge(common, {
   mode: "development",
-  devtool: 'source-map',
+  devtool: "source-map",
 });

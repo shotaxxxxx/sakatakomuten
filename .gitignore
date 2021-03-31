@@ -68,3 +68,7 @@ typings/
 .yarn-integrity
 .env
 .next
+
+
+config/mysql/mysql_data/
+public/

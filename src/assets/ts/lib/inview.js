@@ -1,8 +1,8 @@
-export const inview = function (entry, isIntersecting, activeRootClass) {
+export const inview = function(entry, isIntersecting, activeRootClass) {
   if (isIntersecting) {
     let delayTime = 0;
 
-    if (typeof entry.target.dataset.parent !== "undefined") {
+    if (typeof entry.target.dataset.parent !== 'undefined') {
       activeRootClass = entry.target.dataset.parent;
     }
 
@@ -11,8 +11,8 @@ export const inview = function (entry, isIntersecting, activeRootClass) {
     }
 
     setTimeout(() => {
-      entry.target.classList.add("is-inviewActive");
-      entry.target.classList.remove("is-inviewOver", "is-inviewReady");
+      entry.target.classList.add('is-inviewActive');
+      entry.target.classList.remove('is-inviewOver', 'is-inviewReady');
     }, delayTime);
 
     if (activeRootClass !== false) {
@@ -21,18 +21,18 @@ export const inview = function (entry, isIntersecting, activeRootClass) {
     }
   } else {
     // console.log('auto');
-    if (typeof entry.target.dataset.parent !== "undefined") {
+    if (typeof entry.target.dataset.parent !== 'undefined') {
       activeRootClass = entry.target.dataset.parent;
     }
 
-    entry.target.classList.remove("is-inviewActive");
-    document.documentElement.classList.remove("is-inviewActive");
+    entry.target.classList.remove('is-inviewActive');
+    document.documentElement.classList.remove('is-inviewActive');
     if (activeRootClass !== false) {
       document.documentElement.classList.remove(`is-${activeRootClass}Active`);
     }
 
     if (entry.boundingClientRect.y < entry.rootBounds.y) {
-      entry.target.classList.add("is-inviewOver");
+      entry.target.classList.add('is-inviewOver');
 
       if (activeRootClass !== false) {
         document.documentElement.classList.add(`is-${activeRootClass}Over`);

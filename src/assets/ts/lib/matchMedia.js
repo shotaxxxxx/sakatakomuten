@@ -14,4 +14,4 @@ export default (breakPoint) => {
       return false;
     }
   }
-};
+}

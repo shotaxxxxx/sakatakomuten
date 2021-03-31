@@ -16,49 +16,49 @@ $left: auto;
 
 .p-hamburger {
   position: absolute;
+  z-index: 2;
   top: 0;
   right: $right;
   bottom: 0;
   left: $left;
-  z-index: 2;
-  margin: auto 0;
   width: 24px;
   height: 24px;
-  outline: 0;
+  margin: auto 0;
+  transition: all .3s ease-in-out;
   border: 0;
+  outline: 0;
   background-color: transparent;
   box-shadow: 0 0 40px transparent;
-  transition: all .3s ease-in-out;
 
   &:focus {
     box-shadow: 0 0 0 1px #212121;
   }
 
   &__line {
+    display: block;
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    display: block;
-    margin: auto;
     width: 75%;
     height: 2px;
+    margin: auto;
+    transition: transform .2s ease-in-out;
     border-radius: .25em;
     background-color: $line-color;
-    transition: transform .2s ease-in-out;
   }
 
   &__line:before,
   &__line:after {
-    position: absolute;
+    content: '';
     display: block;
+    position: absolute;
     width: 100%;
     height: 100%;
+    transition: inherit;
     border-radius: inherit;
     background-color: inherit;
-    content: '';
-    transition: inherit;
   }
 
   &__line:before {

@@ -1,70 +1,81 @@
-# Orelop CLI
+# Orelop CLI 2.0
 
 俺のWebサイト制作開発環境
-Ore no Web Develop Comand Line Interface 略して「Orelop CLI」です。
+Ore no Web Develop Command Line Interface 略して「Orelop CLI」です。
 
 僕なりのWebサイト制作の開発環境ってことです。
 
-最近まではGulpを使っていましたが、脱Gulpを目標に、基本はnpm-scriptsとJavaScriptファイルのバンドルにwebpackを使って実行する開発環境を作りました。
-
-まだまだ、問題点はありますが・・・。
+昔はGulpを使って開発環境を作っていましたが、Gulpをやめてwebpackを使って実行する開発環境を作りました。
+version1.0 では、webpackはJavaScriptのバンドルとトランスパイルの目的だけで使っており、他のコンパイルはnpm-scriptsで書いていましたが、このversion2.0では、ほぼ全てのコンパイルをwebpackで行っています。
 
 ## 概要
 この開発環境で開発が可能な言語は以下のとおりです。
 
-- HTML（EJS）
+- HTML（Pug）
 - CSS（Sass）
-- JavaScript
+- JavaScript（TypeScript）
 - PHP
 - MySQL
 
 です。
 
-### HTML
-HTMLは、純粋にHTMLを書く方法とEJSを使う方法で開発できます。
-Pugは・・・・。
+### HTML（Pug）
+静的サイトは、純粋にHTMLを書く方法とPugを使う方法で開発できます。
+pugを開発用にコンパイルする時には、Pretter による整形を行い、
+本番環境用にコンパイルする場合は、HTML、Pugともにminify化されます。
 
-やめました。
 
-### CSS
-CSSは　SCSSでの記述が可能です。
-コンパイルは node-sass でコンパイルしてます。
-glob による @importが可能で、特定のディレクトリ内のscssファイル全てインポートする場合は、以下のように記述できます。
 
-```sass:common.scss
-@import "layout/*";
-@import "object/compornent/*";
-```
+### CSS（Sass / Scss）
+CSSは通常のCSS や Sass/Scss での記述が可能です。
+コンパイルは dart-sass でコンパイルしてます。
+また、コンパイル時に、PostCSSによって様々な調整も行います。
 
-また、コンパイル時に、PostCSSによって、
-Autoplefixerによるベンダープレフィックスを付加したCSSファイルを生成します。
+- `Autoprefixer` によるベンダープレフィックス自動付加（対応ブラウザは `Autoprefixer` の `default`）
+- `Css Declaration Sorter` によるプロパティの並び順の調整（`SMACSS` の順）
+- `CSS MQPacker` による メディアクエリの最適化(複数のメディアクエリをまとめる)
 
-なお、開発用にコンパイルする際は、ソースマップを出力し、リリース用にコンパイルする際は、PostCSSのcssnanoによって、ファイルの圧縮を行います。
+フォーマットやルールの管理は、Pretterと Stylelintを使っています。
+自動でルールの修正できるものは自動で行い、修正できないコードがあればエラーを出力します。
 
-Sassファイルのフォーマットは、Pretterと Stylelintを使って整形することが可能です。プロパティの並び順は、Concentric CSS（ボックスの外から内の順） を採用しています。
+なお、開発用にコンパイルする際は、ソースマップを出力し、
+本番環境用にコンパイル吸う場合は、minify化されます。
 
-余談
-本当は、dart sassを使ってコンパイルしたかったのですが、glob による @importを行うための、importerのオプションがないので、諦めちゃいました。
+### JavaScript（TypeScript）
+JavaScriptは、JavaScriptをそのまま書くか、TypeScriptよる開発が可能です。
 
-### JavaScript
-JavaScriptは、webpackを使ってバンドルをしています。
-「src/assets/js/main.bundle.js」をエントリーポイントとしていますので、そちらに、importして頂ければと思います。
+ES6以降の文法に関しては、IE11ユーザーのことも考慮して、JavaScriptの場合は babel で、
+TypeScriptの場合は tsconfigの設定に基づきES5にトランスパイルします。
 
-なお、デフォルトでjQueryをバンドルしています。
+なお、fetchなどのAPIに関しては、JavaScirptの場合は babelの設定で、core-jsを利用して必要なポリフィルを利用するようにしていますが、
+TypeScriptの場合は、開発時にcore-jsなどを利用して必要なポリフィルを利用するようにお願いします。
 
-また、IE11ユーザーのことも考慮して、ES6以降の記述は、
-babelを利用してES5にトランスパイルしています。
+また、よく使うライブラリなどは予めインストールをしているので、
+利用する際はエントリーポイントに import するだけで利用できます。
 
-なお、JSファイルのフォーマットは、ESlintと、Pretterを利用しています。
+- jQuery
+- Swiper
+- GSAP
+- object-fit-images
 
-JSもCSSと同様で、開発用にコンパイルする際は、ソースマップを出力し、リリース用にコンパイルする際は、webpackによって、ファイルの圧縮を行います。
+フォーマットやルールの管理は、Pretterと Stylelintを使っています。
+自動でルールの修正できるものは自動で行い、修正できないコードがあればエラーを出力します。
+
+なお、開発用にコンパイルする際は、ソースマップを出力し、
+本番環境用にコンパイル吸う場合は、minify化されます。
 
 ### PHP + MySQL
 PHP + MySQLを開発することも可能です。
 
-すでいローカル開発環境をお持ちの場合は、それをお使い頂ければと思いますが、
-Docker Comporse を使った 環境を構築できるような設定ファイルも入れておきます。
+すでにローカル開発環境をお持ちの場合は、そちらをお使い頂ければと思いますが、
+Docker Comporse を使った LAMP環境を構築できるような設定ファイルも入れております。
 
+- Nginx
+- MySQL 5.7
+- PHP 7
+- phpMyAdmin
+
+なお、開発時は BrawserSync による自動リロードも可能です。
 
 ### 画像
 画像ファイルは、
@@ -73,12 +84,15 @@ Docker Comporse を使った 環境を構築できるような設定ファイル
 - `imagemin-gifsicle`
 - `imagemin-svgo`
 
-を使って、圧縮を行います。
+を使って、画像の圧縮を一括で行います。
+なお、「.jpg」と「.png」のファイルに関しては、自動で「.webp」のファイルを生成します。
 
+ファイル名は元のファイル名（拡張子を含む）の後ろに「.webp」という拡張子が追加されます。
+付属の「.htaccess」をサーバーに設置することで「webp」に対応しているブラウザから「jpeg」と「png」をリクエストされた際は、自動で「webp」を返します。
 
 
 ## 必要な環境
-- Node.js 12 ~
+- Node.js 14 ~
 
 ### Node.jsがインストールされているか確認する方法
 ターミナルなどのコマンドラインツールを立ち上げて、以下のコマンドを入力
@@ -112,40 +126,50 @@ docker-comporse -v
 Mac OS での動作確認は行ってますが、Windowsでは動作確認はしてません。
 
 
-## How to Use
-では使い方を紹介します。
+## インストール
+では、Orelop CLI の使い方を紹介します。
 
 
-### 必要なファイル群をダウンロード
+## 必要なファイル群をダウンロード
 まずは、必要なファイル達をダウンロードします。
 
-#### Gitをお使いの方は、このリポジトリを clone する
+### Gitをお使いの方は、このリポジトリを clone する
 
-ターミナルなどのコマンドラインツールを起動し、開発を行うディレクトリで、このリポジトリをcloneして下さい。
+ターミナルなどのコマンドラインツールを起動し、開発を行うディレクトリで、このリポジトリを clone して下さい。
 
 ```
 git clone https://gitlab.com/shibajuku/template/orelop-cli.git
 ```
 
-#### Gitをお持ちじゃない場合は、zipファイルをダウンロード
+### Gitをお持ちじゃない場合は、zipファイルをダウンロード
 ダウロードボタンから、zipファイルをダウンロードして、デスクトップなどに解凍しておいて下さい。
 
 
-### ディレクトリ構造の確認
+## ディレクトリ構造の確認
 
 Orelop CLIは以下のようなディレクトリ構成になっています。
 
 ```
 orelop-cli
+├ .vscode
+│　└ settings.json
+│
+├ config
+│　├ mysql
+│　├ nginx
+│　└ php
+│
 ├ src
 │　├ assets
 │　│ ├ img
-│　│ │ ├ img.jpg
-│　│ │ ├ img.png
-│　│ │ ├ img.svg
-│　│ │ └ img.gif
+│　│ │ └ logo-primary.svg
+│　│ │
 │　│ ├ js
-│　│ │ └ main.bundle.js
+│　│ │ ├ lib
+│　│ │ │ ├ loading.js
+│　│ │ │ ├ ScrollObserver.js
+│　│ │ │ └ Toggle.js
+│　│ │ └ main.js
 │　│ │
 │　│ ├ sass
 │　│ │ ├ foundation
@@ -154,51 +178,67 @@ orelop-cli
 │　│ │ ├ object
 │　│ │ │ ├ component
 │　│ │ │ ├ project
-│　│ │ │ ├ utility
+│　│ │ │ └ utility
 │　│ │ └ common.scss
 │　│ │
-│　├ config
-│　│ ├ mysql
-│　│ ├ nginx
-│　│ └ php
+│　│ ├ ts
+│　│ │ ├ lib
+│　│ │ │ ├ loading.js
+│　│ │ │ ├ ScrollObserver.js
+│　│ │ │ └ Toggle.js
+│　│ │ └ main.ts
 │　│ │
-│　├ ejs
-│　│ ├ include
-│　│ │ └ include.ejs
-│　│ └ index.ejs
-│　│
 │　├ html
-│　│ └ index.html
+│　│ └ sample.html
 │　│
 │　├ php
+│　│ ├ include
+│　│ │ ├ config.php
+│　│ │ ├ footer.php
+│　│ │ ├ functions.php
+│　│ │ └ header.php
 │　│ └ index.php
 │　│
+│　├ pug
+│　│ ├ include
+│　│ │ ├ _config.pug
+│　│ │ ├ _footer.pug
+│　│ │ ├ _head.pug
+│　│ │ ├ _header.pug
+│　│ │ └ _schema.pug
+│　│ ├ layout
+│　│ │ └ _main.pug
+│　│ ├ mixin
+│　│ │ └ _global-nav.pug
+│　│ └ index.pug
+│　│
+│　├ .htaccess
 │　└ humans.txt
 │
-├ package.json
-├ package-lock.json
+├ .browswerslistrc
+├ .eslintrc.json
+├ .gitignore
+├ .prettierrc.json
+├ .stylelintrc.json
 │
-├ babel.config
-├ bs.config.js
-├ copy.config.js
+├ babel.config.js
 ├ docker-compose.yml
-├ imagemin.js
 ├ postcss.config.js
+├ tsconfig.json
 ├ webpack.common.js
 ├ webpack.dev.js
 ├ webpack.prod.js
 │
-├ .eslintrc.json
-├ .gitignore
-├ .prettierrc.json　
-└ .stylelintrc.json
+├ package.json
+├ package.json
+└ yarn.lock
 ```
 
 この src ディレクトリ内で開発を進めて行きます。
 
-### 必要なパッケージをインストール
+## 必要なパッケージをインストール
 
-クローンまたは解答した `orelop-cli` フォルダの名前を変更して、ターミナルなどのコマンドラインツールでそのディレクトリに移動しましょう。
+クローンまたは解凍した `orelop-cli` フォルダの名前を変更して、ターミナルなどのコマンドラインツールでそのディレクトリに移動しましょう。
 
 ```
 cd [リネームしたorelop-cliフォルダ名]
@@ -206,66 +246,110 @@ cd [リネームしたorelop-cliフォルダ名]
 
 移動したら、必要なパッケージをインストールする為に、以下のコマンドを実行します。
 
+【npmの場合】
 ```
 npm ci
 ```
+
+【yarnの場合】
+```
+yarn i
+```
+
 このコマンドを実行すると、ルートディレクトリに配置してある、
- `package.json`、`package-lock.json`の内容を元に、必要なパッケージをインストールしてくれます。
+ `package.json`、`package-lock.json`（ `yarn.lock` ）の内容を元に、必要なパッケージをインストールしてくれます。
+
+
 
 コーヒーを飲んでインストールが終わるまでしばし待ちます。
 
-#### パッケージのアップデート
+### パッケージのアップデート
 
 お使いのタイミングによっては、パッケージが古い場合があります。
 最新になっていないパッケージを一覧表示する場合は、下記のコマンドをターミナルにドンして下さい。
 
+【npmの場合】
 ```
-npm outdate
+npm outdated
 ```
+
+【yarnの場合】
+```
+yarn outdated
+```
+
 
 全て最新にする場合は、以下のコマンドをターミナルにドンでアップデートできます。
 
+【npmの場合】
 ```
 npm update
 ```
 
-ただし、アップデートによって仕様が変わる場合はありますのでご注意下さい。
-個別にパッケージｗアップデートする場合は以下のコマンドをターミナルにドンして下さい。
+【yarnの場合】
+```
+yarn upgrade
+```
 
+ただし、アップデートによって仕様が変わる場合はありますのでご注意下さい。
+個別にパッケージをアップデートする場合は以下のコマンドをターミナルにドンして下さい。
+
+【npmの場合】
 ```
 npm update [更新したいパッケージ名]
 ```
+【yarnの場合】
+```
+yarn upgrade [更新したいパッケージ名]
+```
 
 もし、必要のないパッケージがある場合は、下記のコマンドで削除して下さい。
+
+【npmの場合】
 ```
 npm uninstall [削除したいパッケージ名]
 ```
+【yarnの場合】
+```
+yarn remove [削除したいパッケージ名]
+```
 
-また、npm 自体のアップデートをする場合は以下のコマンドをターミナルにドンして下さい。
 
+また、npm や yarn 自体のアップデートをする場合は以下のコマンドをターミナルにドンして下さい。
+
+【npmの場合】
 ```
 npm update npm
 ```
 
+【yarnの場合】
+```
+npm install yarn -g
+```
 
-### 開発を開始する
+
+## 開発を開始する
 
 開発を開始する際は、以下のコマンドを実行するとファイルの監視が始まります。
+
+【npmの場合】
 
 ```
 npm run dev
 ```
 
-この `npm run dev` というコマンドを実行すると、まずルートディレクトリに `public` というフォルダを生成し、`src` フォルダから、必要なファイルを `public` フォルダにコピーしたり、コンパイルします。そして、`src` フォルダのウォッチ（監視）を開始し、ローカルサーバが立ち上がります。
+【yarnの場合】
+```
+yarn run dev
+```
+この `npm run dev` （`yarn run dev`）というコマンドを実行すると、まずルートディレクトリに `public` というフォルダを生成し、`src` フォルダから、必要なファイルを `public` フォルダにコピーしたり、コンパイルします。そして、`src` フォルダのウォッチ（監視）を開始し、ローカルサーバが立ち上がります。
 
 ウォッチ中はファイルの変更を感知し、変更があれば自動でコンパイルします。
-（一部テキストファイルなど、更新が頻繁なファイルに関しましては、ウォッチをしていません。）
-
 ウォッチを停止するには、「control」+「c」でウォッチを停止できます。
 
 ウォッチ中は、`src` フォルダの中で開発を進めて下さい。
 
-#### HTMLの開発
+## HTMLの開発
 HTMLは、`src/html` フォルダ内で開発して下さい。
 必要に応じて、`src/html` フォルダ内に新たなフォルダを作ってもらっても構いません。
 
@@ -273,43 +357,64 @@ HTMLは、`src/html` フォルダ内で開発して下さい。
 
 従って、相対パスを書く場合は、`public` ファイル内の構造を基準に考えてください。
 
-##### 例：`src/html` 直下にあるHTMLファイルに common.css をリンクする場合
+### 例：`src/html` 直下にあるHTMLファイルに common.css をリンクする場合
 
-```
+```html
 <link href="assets/css/common.css" rel="stylesheet">
 ```
 
-なお、EJSによる開発を行わない場合は、`src` 内の `ejs` フォルダは削除しておいて下さい。
+なお、Pugによる開発を行わない場合は、`src` 内の `pug` フォルダは削除しておいて下さい。
 
-#### EJSの開発
-EJSは、`src/ejs` フォルダ内で開発して下さい。
+## Pugの開発
+Pugは、`src/pug` フォルダ内で開発して下さい。
 
-保存したり、新規のファイルを作成するとディレクトリの構造を保ったまま、 `public`フォルダの直下にコピーされます。
+保存したり、新規のファイルを作成するとディレクトリの構造を保ったまま、 `public`フォルダの直下にコンパイルされます。
 
-必要に応じて、`src/ejs` フォルダ内に新たなフォルダを作ってもらっても構いません。
+必要に応じて、`src/pug` フォルダ内に新たなフォルダを作ってもらっても構いません。
 
 従って、相対パスを書く場合は、`public` ファイル内の構造を基準に考えてください。
 
-##### 例：`src/ejs` 直下にあるHTMLファイルに common.css をリンクする場合
+### 例：`src/pug` 直下にあるHTMLファイルに common.css をリンクする場合
 
-```
-<link href="assets/css/common.css" rel="stylesheet">
+```pug
+ link(href="assets/css/common.css", rel="stylesheet")
 ```
 
 なお、`src/html` フォルダを使わない場合は、`src` 内の `html` フォルダを削除しておいて下さい。
 
-なお、コンパイル後ファイルを生成したくないパーシャルファイルを作成する場合は、ファイル名を `_` から初めて下さい。
+なおデフォルトでは各ファイルを以下のようなルールで保存しています。
 
-#### CSS（SCSS）の開発
-CSSは、`src/assets/sass` フォルダ内で開発して下さい。
-インポート元のsassファイルの名前は、`common.scss` として下さい。
+- コンポーネントは `include` フォルダ内に作成
+- レイアウトなどの継承ファイルは `layout` フォルダ内に作成
+- mixinは `mixin` フォルダ内に作成
 
-基本的には、`scss` 記法による開発を想定しています。
+コンパイル後ファイルを生成したくないパーシャルファイルを作成する場合は、ファイル名を `_` から初めて下さい。
 
-デフォルトでは、FLOCSS の設計を元にした、ディレクトリを用意していますが、必要に応じて変更してもらって構いません。
+## CSSの開発
+CSSを開発する場合は、`src/assets/css` フォルダ内で開発して下さい。
+
+保存したり、新規のファイルを作成するとディレクトリの構造を保ったまま、 `public/assets/css`フォルダ内に保存されます。
+
+その際、`PostCSS` や、`Pretter`、`Stylelint`を用いて、以下のような中間処理を行います。
+
+- `Autoprefixer` によるベンダープレフィックス自動付加（対応ブラウザは `Autoprefixer` の `default`）
+- `Css Declaration Sorter` によるプロパティの並び順の調整（`SMACSS` の順）
+- `CSS MQPacker` による メディアクエリの最適化(複数のメディアクエリをまとめる)
+- `Pretter` によるフォーマットとルールのチェック
+- `Stylelint` によるルールのチェック（修正できるものは自動修正）
+
+
+## Sass/Scssの開発
+Sass/Scssで開発する場合は、`src/assets/sass` フォルダ内で、開発して下さい。
+
+インポート元のsassファイルはデフォルトでは、`common.scss` としています。
+
+なお、予め FLOCSS の設計を元にした、ディレクトリを用意していますが、必要に応じて変更してもらって構いません。
+また、予め 俺流のreset.css「Oreset.css」（`foundation/_oreset.scss`）や俺流フレキシブルCSSグリッドシステム「Olex 2.0」（`component/_grid.scss`）、俺流スクロールエフェクトの「Oreroll」（`component/_inview.scss`）も用意しています。
 
 `scss` のインポートは、`glob` よる読み込みが可能です。
 
+### 読み込みのサンプル
 ```sass:common.scss
 @import "layout/*";
 @import "object/compornent/*";
@@ -319,76 +424,153 @@ CSSは、`src/assets/sass` フォルダ内で開発して下さい。
 
 scssは、ファイルを保存したり、新規のファイルを作成すると `public/assets/css`フォルダ内に`css` をコンパイルします。
 
-その際、`PostCSS` を用いて、以下のような中間処理を行います。
+その際、`PostCSS` や、`Pretter`、`Stylelint`を用いて、以下のような中間処理を行います。
 
-1. `Css Declaration Sorter` によるプロパティの並び順の調整（`Concentric CSS` の順）
-2. `Autoprefixer` によるベンダープレフィックス自動付加（対応ブラウザは `Autoprefixer` の `default`）
-3. `CSS MQPacker` による メディアクエリの最適化(複数のメディアクエリをまとめる)
+- `Autoprefixer` によるベンダープレフィックス自動付加（対応ブラウザは `Autoprefixer` の `default`）
+- `Css Declaration Sorter` によるプロパティの並び順の調整（`SMACSS` の順）
+- `CSS MQPacker` による メディアクエリの最適化(複数のメディアクエリをまとめる)
+- `Pretter` によるフォーマットとルールのチェック
+- `Stylelint` によるルールのチェック（修正できるものは自動修正）
 
 また、開発時のデバックを行いやすいように、ソースマップも `public/assets/css`フォルダに出力します。
 
-#### JavaScriptの開発
+## JavaScriptの開発
 JavaScriptは、`src/assets/js` フォルダ内で開発して下さい。
 
-インポート元のエントリーポイントとなるJavaScriptファイルの名前は、`main.js` として下さい。
+インポート元のエントリーポイントとなるJavaScriptファイルの名前をデフォルトでは、`main.js` としています。
 
-なお、デフォルトで `jQuery` をバンドルしていますが、必要がない場合は、
-`main.js`の下記の部分を削除してお使い下さい。
+なお、デフォルトで以下のライブラリをインストールしています。
 
+- jQuery
+- Swiper
+- GSAP
+- object-fit-images
+
+利用する場合は、`main.js`の下記の部分のコメント外してお使い下さい。
+
+【jQueryを使う場合】
 ```javascript:main.bundle.js
-import $ from 'jquery';
+import $ from 'jquery'; // コメントを外す
+// import Swiper from 'swiper';
+// import ScrollObserver from './lib/ScrollObserver';
+// import Toggle from './lib/Toggle';
+// import { dropdown } from './lib/dropdown';
+// import { inview } from './lib/inview';
 ```
 
 また、モジュール単位でJavaScriptファイルを作成する場合は、
 エントリーポイントとなる `main.js` にインポートしてお使い下さい。
 
-```javascript:main.bundle.js
+```javascript:main.js
 import $ from 'jquery';
 import 'sub';
 ```
 
 JavaScriptは、ファイルを保存したり、新規のファイルを作成すると `public/assets/js`フォルダ内に各JavaScriptファイルをバンドルした`main.bundle.js` というファイルをコンパイルします。
 
-その際、`webpack` を用いて、以下のような中間処理を行います。
+その際、`babel`や、`Prettier`、`ESlint`を用いて、以下のような中間処理を行います。
 
-1. `ESlint` と　`prettier` による構文のチェック
-2. `babel` にES5へのトランスパイル
+- `babel` によるES5へのトランスパイル
+- `core-js` によるプリフィルの設定
+- `Pretter` によるフォーマットとルールのチェック
+- `Stylelint` によるルールのチェック（修正できるものは自動修正）
 
 
 また、開発時のデバックを行いやすいように、ソースマップも `public/assets/js`フォルダに出力します。
 
-#### PHPの開発
-PHPでの開発を行うには、少々準備が必要になります。
+## TypeScriptの開発
+TypeScriptは、`src/assets/ts` フォルダ内で開発して下さい。
 
+開発に当たっては webpack.config.js の20行目付近にある以下の設定を変更して下さい。
 
-まず、サーバーサイド開発で、ブラウザのライブリロードを有効にする場合は、`bs.config.js` を開き、3行目 - 5行目の `server` オブジェクトをコメントアウトし、7行目の先頭にある `//` を削除しコメント解除し `proxy` を有効にして下さい。
-
-```
-module.exports = {
-  "files": './public/**/*.css, ./public/**/*.js, ./public/**/*.html, ./public/**/*.php',
-  // "server": { // PHPを使う時は server オブジェクトをコメントにする
-  //   baseDir: './public/',
-  //   index: 'index.html'
-  // },
-  "proxy": 'http://localhost:8080/',  // PHPを使う時用
-  "online": true,
-  "open": 'external',
-  "proxy": false,
-  "port": 3000
+```javascript: webpack.config.js
+const settings = {
+  sass: true,
+  ts: true, // これを true にする
+  php: false,
 };
-
 ```
+
+インポート元のエントリーポイントとなるTypeScriptファイルの名前をデフォルトでは、`main.ts` としています。
+
+なお、デフォルトで以下のライブラリをインストールしています。
+
+- jQuery
+- Swiper
+- GSAP
+- object-fit-images
+
+利用する場合は、`main.ts`の下記の部分のコメント外してお使い下さい。
+
+【jQueryを使う場合】
+```javascript:main.ts
+import $ from 'jquery'; // コメントを外す
+// import Swiper from 'swiper';
+// import ScrollObserver from './lib/ScrollObserver';
+// import Toggle from './lib/Toggle';
+// import { dropdown } from './lib/dropdown';
+// import { inview } from './lib/inview';
+```
+
+また、モジュール単位でJavaScriptファイルを作成する場合は、
+エントリーポイントとなる `main.js` にインポートしてお使い下さい。
+
+```javascript:main.ts
+import $ from 'jquery';
+import 'sub';
+```
+
+TypeScriptは、ファイルを保存したり、新規のファイルを作成すると `public/assets/js`フォルダ内に各JavaScriptファイルをバンドルした`main.bundle.js` というファイルをコンパイルします。
+
+その際、`babel`や、`Prettier`、`ESlint`を用いて、以下のような中間処理を行います。
+
+- `tsconfig.json` に基づいてES5へのトランスパイル
+- `Pretter` によるフォーマットとルールのチェック
+- `Stylelint` によるルールのチェック（修正できるものは自動修正）
+
+
+また、開発時のデバックを行いやすいように、ソースマップも `public/assets/js`フォルダに出力します。
+
+## PHPの開発
+PHPでの開発を行うには、`src/php` フォルダ内で開発して下さい。
+必要に応じて、`src/php` フォルダ内に新たなフォルダを作ってもらっても構いません。
+
+開発に当たっては webpack.config.js の20行目付近にある以下の設定を変更して下さい。
+
+```javascript: webpack.config.js
+const settings = {
+  sass: true,
+  ts: false,
+  php: true, // これを true にする
+};
+```
+
+これによりPHPファイル更新時の自動リロードが有効になります。
+
+なお、ファイルを保存したり、新規のファイルを作成するとディレクトリの構造を保ったまま、 `public`フォルダの直下にコピーされます。
+
+従って、相対パスを書く場合は、`public` ファイル内の構造を基準に考えてください。
+
+### 例：`src/php` 直下にあるHTMLファイルに common.css をリンクする場合
+
+```html
+<link href="assets/css/common.css" rel="stylesheet">
+```
+
+なお、PHPによる開発を行わない場合は、`src` 内の `php` フォルダは削除しておいて下さい。
+
+
 
 続いて環境を用意しましょう。
 
-#####  XAMPPやMAMPを使う場合
+###  XAMPPやMAMPを使う場合
 PHPはXAMPPやMAMPを使って開発される場合は、この `Orelop CLI`のディレクトリを `htdocs` などの公開フォルダに配置して開発して下さい。
 
 なお、お使いの環境の `http` のポート番号に合わせて `bs.config.js` 7行目にある `proxy` の `8080` の部分をお使いのポート番号に変更して下さい。
 
 そして、ルートディレクトリにある `config` フォルダは不要になりますので、削除しておいて下さい。
 
-#####  Docker を使う場合
+###  Docker を使う場合
 `docker-compose.yml`を使って Niginx PHP MySQL phpMyAdmin の環境を作ることができます。
 
 *ウォッチ停止中*に、ルートディレクトリをターミナルなどのコマンドラインツールで開き、以下のコマンドを実行することで、環境をインストールすることが出来ます。
@@ -409,31 +591,7 @@ docker-compose up -d
 docker ps
 ```
 
-##### 開発
-
-PHPの開発も静的ファイルと同様で、
-
-```
-npm run dev
-```
-
-でウォッチが始まります。
-
-PHPは、`src/php` フォルダ内で開発して下さい。
-必要に応じて、`src/php` フォルダ内に新たなフォルダを作ってもらっても構いません。
-
-保存したり、新規のファイルを作成するとディレクトリの構造を保ったまま、 `public`フォルダの直下にコピーされます。
-
-従って、相対パスを書く場合は、`public` ファイル内の構造を基準に考えてください。
-
-##### 例：`src/php` 直下にあるHTMLファイルに common.css をリンクする場合
-
-```
-<link href="assets/css/common.css" rel="stylesheet">
-```
-開発が終わったら、「control」+「c」でウォッチを停止します。
-
-Dockerを使ってる場合は、以下のコマンドで コンテナを停止しましょう。
+Dockerでの開発が終わったら、「control」+「c」でウォッチを停止し、以下のコマンドで コンテナを停止しましょう。
 
 ```bash:ターミナル
 docker-comporse down
@@ -451,6 +609,8 @@ docker ps
 docker images
 ```
 
+
+
 なお、引き続き開発を行う際は、再度以下のコマンドを実行して、コンテナを起動します。
 
 ```bash:ターミナル
@@ -466,8 +626,13 @@ docker-compose up -d
 docker-comporse down
 ```
 
+案件が終わってイメージを削除するには `docker images` でimageのIDを確認後、以下のコマンドを入力します。
+```bash:ターミナル
+docker rmi ［imageのID］
+```
 
-#### MySQLの開発
+
+## MySQLの開発
 Dockerで環境を作った場合は、デフォルトで `docker_db` というデータベースをひとつ作ってあります。
 
 開発中はそのデータベースを使ってアプリを開発してもらえればと思います。
@@ -514,7 +679,7 @@ mysql -u docker_user -p
 
 docker_db というデータベースだけを操作できる権限ですので、このデータベースを使ってアプリを作ってください。
 
-##### phpMyAdmin を使う
+### phpMyAdmin を使う
 
 phpMyAdmin を使う場合は、
 
@@ -529,19 +694,27 @@ http://localhost:8888
 
 開発が完了し、本番用のファイルを作成するには、以下コマンドを利用します。
 
+【npmの場合】
 ```
 npm run prod
 ```
 
+【yarnの場合】
+```
+yarn run prod
+```
 
 基本的には `dev` コマンドと同様で必要なファイルのコピーやコンパイルを行います。
 
 ですが、以下の部分が異なります。
 
-- sassファイルをコンパイルする前に、`stylelint` と `prettier` による構文のチェック
-- `stylelint` によって、sassファイル内のプロパティの並び順を整理
-- `PostCSS` の `cssnano` によって sassをコンパイルする際に、CSSファイルを圧縮
-- JSファイルをコンパイルする際に、ファイルを圧縮
+- HTML（Pug）ファイルの minify 化
+- CSS（Sass/Scss）ファイルの minify 化
+- JS（TypeScript）ファイルの minify 化
 - ソースマップは出力しない
 
-つまり、コンパイルしたデータは、圧縮処理され本番にふさわしいデータを作成します。
+コンパイルしたデータは、圧縮処理され本番にふさわしいデータを作成します。
+
+あとは、`public`フォルダ内のデータをデプロイして頂ければと思います。
+
+`.heaccess`や `humans.txt`は必要に応じてアップロードして下さい。

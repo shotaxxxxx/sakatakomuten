@@ -18,18 +18,18 @@ $right: 0;
 
 .p-globalNav {
   position: fixed;
+  z-index: 1;
   top: 0;
   right: $right;
   bottom: 0;
   left: $left;
-  z-index: 1;
-  padding: 3em 0 0;
   width: 100%;
   height: 120%;
+  padding: 3em 0 0;
+  transform: translateX($translate);
+  transition: transform .3s ease-in-out;
   background-color: $main-color;
   box-shadow: $shadow-position 0 4px rgba(0, 0, 0, .16);
-  transition: transform .3s ease-in-out;
-  transform: translateX($translate);
 }
 
 .is-drawerActive .p-globalNav {
@@ -41,8 +41,8 @@ $right: 0;
     position: static;
     width: 100%;
     height: auto;
-    box-shadow: none;
-    background-color: transparent;
     transform: translateX(0);
+    background-color: transparent;
+    box-shadow: none;
   }
 }

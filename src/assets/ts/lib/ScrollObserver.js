@@ -3,10 +3,10 @@ export default class ScrollObserver {
     this.els = document.querySelectorAll(els);
     const defaultOptions = {
       root: null,
-      rootMargin: "0% 0% -240px",
+      rootMargin: '0% 0% -240px',
       threshold: [0, 0.5, 1.0],
       once: true,
-      readyClass: "is-inviewReady",
+      readyClass: 'is-inviewReady',
       activeRootClass: false,
     };
     this.cd = cd;
@@ -17,8 +17,8 @@ export default class ScrollObserver {
   }
 
   _init() {
-    const callback = function (entries, observer) {
-      entries.forEach((entry) => {
+    const callback = function(entries, observer) {
+      entries.forEach(entry => {
         if (entry.isIntersecting) {
           this.cd(entry, true, this.options.activeRootClass);
           if (this.once && !this.options.activeRootClass) {
@@ -34,7 +34,7 @@ export default class ScrollObserver {
 
     this.io.POLL_INTERVAL = 100;
 
-    this.els.forEach((el) => {
+    this.els.forEach(el => {
       el.classList.add(this.readyClass);
       this.io.observe(el);
     });

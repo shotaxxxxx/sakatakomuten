@@ -25,7 +25,7 @@ export default class Toggle {
       if (Array.isArray(this.options.relation)) {
         this.DOM.relation = [];
         this.relationObjectName = [];
-        this.options.relation.forEach((val) => {
+        this.options.relation.forEach(val => {
           this.DOM.relation.push(document.querySelector(val));
           this.relationObjectName.push(val.substring(4));
         });
@@ -42,7 +42,7 @@ export default class Toggle {
 
     // console.log(this.DOM.btn);
     if (this.DOM.btn !== null) {
-      this.DOM.btn.forEach((elem) => {
+      this.DOM.btn.forEach(elem => {
         elem.addEventListener("click", this._toggle.bind(this), { passive: true });
       });
     }
