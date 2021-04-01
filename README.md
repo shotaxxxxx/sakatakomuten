@@ -21,7 +21,7 @@ version1.0 では、webpackはJavaScriptのバンドルとトランスパイル�
 
 ### HTML（Pug）
 静的サイトは、純粋にHTMLを書く方法とPugを使う方法で開発できます。
-pugを開発用にコンパイルする時には、Pretter による整形を行い、
+pugを開発用にコンパイルする時には、`Pretter` による整形を行い、
 本番環境用にコンパイルする場合は、HTML、Pugともにminify化されます。
 
 
@@ -35,7 +35,7 @@ CSSは通常のCSS や Sass/Scss での記述が可能です。
 - `Css Declaration Sorter` によるプロパティの並び順の調整（`SMACSS` の順）
 - `CSS MQPacker` による メディアクエリの最適化(複数のメディアクエリをまとめる)
 
-フォーマットやルールの管理は、Pretterと Stylelintを使っています。
+フォーマットやルールの管理は、`Pretter`と `Stylelint`を使っています。
 自動でルールの修正できるものは自動で行い、修正できないコードがあればエラーを出力します。
 
 なお、開発用にコンパイルする際は、ソースマップを出力し、
@@ -44,21 +44,21 @@ CSSは通常のCSS や Sass/Scss での記述が可能です。
 ### JavaScript（TypeScript）
 JavaScriptは、JavaScriptをそのまま書くか、TypeScriptよる開発が可能です。
 
-ES6以降の文法に関しては、IE11ユーザーのことも考慮して、JavaScriptの場合は babel で、
+ES6以降の文法に関しては、IE11ユーザーのことも考慮して、JavaScriptの場合は `Babel` で、
 TypeScriptの場合は tsconfigの設定に基づきES5にトランスパイルします。
 
-なお、fetchなどのAPIに関しては、JavaScirptの場合は babelの設定で、core-jsを利用して必要なポリフィルを利用するようにしていますが、
-TypeScriptの場合は、開発時にcore-jsなどを利用して必要なポリフィルを利用するようにお願いします。
+なお、機能などのAPIに関しては、JavaScirptの場合は babelの設定で、`core-js`、`regenerator-runtime`を利用して必要なポリフィルを利用するようにしていますが、
+TypeScriptの場合は、`core-js`、`regenerator-runtime`を直接 `import` として読み込んでいます。
 
 また、よく使うライブラリなどは予めインストールをしているので、
-利用する際はエントリーポイントに import するだけで利用できます。
+利用する際はエントリーポイントに `import` するだけで利用できます。
 
 - jQuery
 - Swiper
 - GSAP
 - object-fit-images
 
-フォーマットやルールの管理は、Pretterと Stylelintを使っています。
+フォーマットやルールの管理は、`Pretter`と `Stylelint`を使っています。
 自動でルールの修正できるものは自動で行い、修正できないコードがあればエラーを出力します。
 
 なお、開発用にコンパイルする際は、ソースマップを出力し、
@@ -68,14 +68,14 @@ TypeScriptの場合は、開発時にcore-jsなどを利用して必要なポリ
 PHP + MySQLを開発することも可能です。
 
 すでにローカル開発環境をお持ちの場合は、そちらをお使い頂ければと思いますが、
-Docker Comporse を使った LAMP環境を構築できるような設定ファイルも入れております。
+`Docker Comporse` を使った LAMP環境を構築できるような設定ファイルも入れております。
 
 - Nginx
 - MySQL 5.7
 - PHP 7
 - phpMyAdmin
 
-なお、開発時は BrawserSync による自動リロードも可能です。
+なお、開発時は `BrawserSync` による自動リロードも可能です。
 
 ### 画像
 画像ファイルは、
@@ -85,10 +85,10 @@ Docker Comporse を使った LAMP環境を構築できるような設定ファ�
 - `imagemin-svgo`
 
 を使って、画像の圧縮を一括で行います。
-なお、「.jpg」と「.png」のファイルに関しては、自動で「.webp」のファイルを生成します。
+なお、「`.jpg`」と「`.png`」のファイルに関しては、自動で「`.webp`」のファイルを生成します。
 
-ファイル名は元のファイル名（拡張子を含む）の後ろに「.webp」という拡張子が追加されます。
-付属の「.htaccess」をサーバーに設置することで「webp」に対応しているブラウザから「jpeg」と「png」をリクエストされた際は、自動で「webp」を返します。
+ファイル名は元のファイル名（拡張子を含む）の後ろに「`.webp`」という拡張子が追加されます。
+付属の「`.htaccess`」をサーバーに設置することで「`webp`」に対応しているブラウザから「`jpeg`」と「`png`」をリクエストされた際は、自動で「`webp`」を返します。
 
 
 ## 必要な環境
@@ -469,8 +469,7 @@ JavaScriptは、ファイルを保存したり、新規のファイルを作成�
 
 その際、`babel`や、`Prettier`、`ESlint`を用いて、以下のような中間処理を行います。
 
-- `babel` によるES5へのトランスパイル
-- `core-js` によるプリフィルの設定
+- `babel`、`core-js`、`regenerator-runtime` によるES5へのトランスパイルとポリフィルの設定
 - `Pretter` によるフォーマットとルールのチェック
 - `Stylelint` によるルールのチェック（修正できるものは自動修正）
 
@@ -523,7 +522,7 @@ TypeScriptは、ファイルを保存したり、新規のファイルを作成�
 
 その際、`babel`や、`Prettier`、`ESlint`を用いて、以下のような中間処理を行います。
 
-- `tsconfig.json` に基づいてES5へのトランスパイル
+- `tsconfig.json`、`core-js`、`regenerator-runtime` に基づいてES5へのトランスパイル
 - `Pretter` によるフォーマットとルールのチェック
 - `Stylelint` によるルールのチェック（修正できるものは自動修正）
 

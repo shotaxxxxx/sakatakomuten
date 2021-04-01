@@ -1,4 +1,7 @@
 // Polyfill
+import "core-js/stable";
+import "regenerator-runtime/runtime";
+
 import "intersection-observer";
 import objectFitImages from "object-fit-images";
 import closetPolyfill from "./lib/closet.polyfill";
