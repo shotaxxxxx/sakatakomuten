@@ -6,7 +6,6 @@ module.exports = (api) => {
       [
         "@babel/preset-env",
         {
-          targets: ["defaults"],
           useBuiltIns: "usage",
           corejs: 3, // バージョンを指定
         },

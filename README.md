@@ -31,7 +31,7 @@ CSSは通常のCSS や Sass/Scss での記述が可能です。
 コンパイルは dart-sass でコンパイルしてます。
 また、コンパイル時に、PostCSSによって様々な調整も行います。
 
-- `Autoprefixer` によるベンダープレフィックス自動付加（対応ブラウザは `Autoprefixer` の `default`）
+- `Autoprefixer` によるベンダープレフィックス自動付加（対応ブラウザは `browserslist` で設定）
 - `Css Declaration Sorter` によるプロパティの並び順の調整（`SMACSS` の順）
 - `CSS MQPacker` による メディアクエリの最適化(複数のメディアクエリをまとめる)
 
@@ -215,7 +215,6 @@ orelop-cli
 │　├ .htaccess
 │　└ humans.txt
 │
-├ .browswerslistrc
 ├ .eslintrc.json
 ├ .gitignore
 ├ .prettierrc.json

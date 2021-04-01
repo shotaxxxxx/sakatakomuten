@@ -4,6 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "private": true,
+  "browserslist": [
+    "defaults",
+    ">= 1%"
+  ],
   "scripts": {
     "creanup": "rimraf ./public",
     "dev": "npm run creanup && webpack --watch --config ./webpack.dev.js",
