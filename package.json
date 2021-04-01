@@ -5,8 +5,7 @@
   "license": "MIT",
   "private": true,
   "browserslist": [
-    "defaults",
-    ">= 1%"
+    "defaults"
   ],
   "scripts": {
     "creanup": "rimraf ./public",
