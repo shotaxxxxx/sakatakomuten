@@ -12,7 +12,7 @@
   <meta property="og:title" content="<?php echo h($page['title']); ?>">
   <meta property="og:description" content="<?php echo h($page['desctiption']); ?>">
   <meta property="og:site_name" content="<?php echo h(SITE_NAME); ?>">
-  <meta property="og:image" content="【サイトURL】OGP画像のファイルパス">
+  <meta property="og:image" content="<?php echo h($page['image']); ?>">
   <meta property="og:locale" content="ja_JP">
   <link rel="canonical" href="<?php echo h(SITE_URL); ?>/">
   <link rel="stylesheet" href="<?php echo h(ROOT_PATH); ?>assets/css/common.css?<?php echo h(NOW); ?>">
