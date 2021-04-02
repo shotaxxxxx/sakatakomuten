@@ -3,16 +3,16 @@
 /* =====================================================
   1.0 - Foundation
 ===================================================== */
-@import 'inc/setting';
-@import 'inc/functions';
-@import 'inc/mixin';
-@import 'foundation/oreset';
-@import 'foundation/base';
+@import "inc/setting";
+@import "inc/functions";
+@import "inc/mixin";
+@import "foundation/oreset";
+@import "foundation/base";
 
 /* =====================================================
   2.0 - Layout
 ===================================================== */
-@import 'Layout/*';
+@import "Layout/*";
 
 /* =====================================================
   3.0 - Object
@@ -21,14 +21,14 @@
 /*
   3.1 - Component
 -----------------------------------------------------*/
-@import 'object/component/*';
+@import "object/component/*";
 
 /*
   3.2 - Project
 -----------------------------------------------------*/
-@import 'object/project/*';
+@import "object/project/*";
 
 /*
   3.2 - Utility
 -----------------------------------------------------*/
-@import 'object/utility/*';
+@import "object/utility/*";

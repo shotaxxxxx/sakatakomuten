@@ -132,7 +132,7 @@ html {
 
 body {
   min-height: 100%;
-  font: 1em/1.5 sans-serif;
+  font: 1em/1.5 $font-set-primary;
   letter-spacing: .05em;
   text-rendering: optimizeLegibility;
   -webkit-overflow-scrolling: touch;

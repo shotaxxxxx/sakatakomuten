@@ -20,15 +20,15 @@ $duration-slow: 2s;
   // ==============================
   //  Option Duration
   // ==============================
-  &[data-duration='fast'] {
+  &[data-duration="fast"] {
     transition-duration: $duration-fast;
   }
 
-  &[data-duration='normal'] {
+  &[data-duration="normal"] {
     transition-duration: $duration-normal;
   }
 
-  &[data-duration='slow'] {
+  &[data-duration="slow"] {
     transition-duration: $duration-slow;
   }
 
@@ -37,7 +37,7 @@ $duration-slow: 2s;
   // ==============================
 
   // FadeIn
-  &[data-type~='fadeIn'] {
+  &[data-type~="fadeIn"] {
     &.is-inviewReady {
       opacity: 0;
     }
@@ -47,7 +47,7 @@ $duration-slow: 2s;
   }
 
   // slideUpIn
-  &[data-type~='slideUpIn'] {
+  &[data-type~="slideUpIn"] {
     &.is-inviewReady {
       transform: translateY(2.5rem);
       opacity: 0;
@@ -59,7 +59,7 @@ $duration-slow: 2s;
   }
 
   // slideDownIn
-  &[data-type~='slideDownIn'] {
+  &[data-type~="slideDownIn"] {
     &.is-inviewReady {
       transform: translateY(-2.5rem);
       opacity: 0;
@@ -72,7 +72,7 @@ $duration-slow: 2s;
   }
 
   // slideLeftIn
-  &[data-type~='slideLeftIn'] {
+  &[data-type~="slideLeftIn"] {
     &.is-inviewReady {
       transform: translateX(2.5rem);
     }
@@ -83,7 +83,7 @@ $duration-slow: 2s;
   }
 
   // slideRightIn
-  &[data-type~='slideRightIn'] {
+  &[data-type~="slideRightIn"] {
     &.is-inviewReady {
       transform: translateX(-2.5rem);
       opacity: 0;
@@ -96,7 +96,7 @@ $duration-slow: 2s;
   }
 
   // slideCubeIn
-  &[data-type~='slideCubeIn'] {
+  &[data-type~="slideCubeIn"] {
     &.is-inviewReady {
       transform: translate3d(2.5rem, 2.5rem, 0);
       opacity: 0;
@@ -109,7 +109,7 @@ $duration-slow: 2s;
   }
 
   // zoomIn
-  &[data-type~='zoomIn'] {
+  &[data-type~="zoomIn"] {
     &.is-inviewReady {
       transform: scale(0);
     }

@@ -229,8 +229,6 @@ module.exports = {
       overrideExtension: false, // 拡張子の変換を行わない
     }),
     new StyleLintPlugin({
-      configFile: ".stylelintrc.json",
-      files: "./src/**/*.(s(c|a)ss|css)",
       fix: true, // 自動修正可能なものは修正
     }),
     ...templates,

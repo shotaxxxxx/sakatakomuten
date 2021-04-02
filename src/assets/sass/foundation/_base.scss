@@ -2,17 +2,3 @@
 /*
   Base
 -----------------------------------------------------*/
-body {
-  font-family: $font-set-primary;
-}
-
-a {
-  transition-property: color, background, border;
-  transition-duration: .3s;
-  transition-timing-function: $easing;
-
-  &::before,
-  &::after {
-    transition: inherit;
-  }
-}
