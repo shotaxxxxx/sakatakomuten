@@ -1,12 +1,9 @@
 {
   "semi": true,
-  "trailingComma": "all",
-  "htmlWhitespaceSensitivity": "css",
+  "trailingComma": "es5",
   "bracketSpacing": true,
   "singleQuote": false,
   "printWidth": 120,
   "tabWidth": 2,
-  "useTabs": false,
-  "parser": "typescript",
-  "proseWrap": "preserve"
+  "useTabs": false
 }
