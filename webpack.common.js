@@ -54,7 +54,7 @@ documents.forEach((document) => {
       template: document,
       inject: false,
       minify: false,
-    }),
+    })
   );
 });
 
@@ -230,6 +230,7 @@ module.exports = {
     }),
     new StyleLintPlugin({
       fix: true, // 自動修正可能なものは修正
+      failOnError: true, //エラー検出時にビルド中断
     }),
     ...templates,
   ],
