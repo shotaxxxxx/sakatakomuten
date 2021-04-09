@@ -4,18 +4,19 @@
     "stylelint-config-property-sort-order-smacss",
     "stylelint-prettier/recommended"
   ],
-  "plugins": [
-    "stylelint-prettier",
-    "stylelint-scss",
-    "stylelint-order"
-  ],
-  "ignoreFiles": [
-    "**/node_modules/**"
-  ],
+  "plugins": ["stylelint-prettier", "stylelint-scss", "stylelint-order"],
+  "ignoreFiles": ["**/node_modules/**"],
   "rules": {
     "prettier/prettier": true,
-    "number-leading-zero": "never",
+    "number-leading-zero": "always",
     "length-zero-no-unit": true,
-    "unit-case": "lower"
+    "unit-case": "lower",
+    "color-hex-case": "lower",
+    "color-hex-length": "short",
+    "font-family-name-quotes": "always-where-recommended",
+    "string-quotes": "double",
+    "shorthand-property-no-redundant-values": true,
+    "value-keyword-case": "lower",
+    "property-case": "lower"
   }
 }

@@ -24,7 +24,7 @@ $left: auto;
   width: 24px;
   height: 24px;
   margin: auto 0;
-  transition: all .3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   border: 0;
   outline: 0;
   background-color: transparent;
@@ -44,8 +44,8 @@ $left: auto;
     width: 75%;
     height: 2px;
     margin: auto;
-    transition: transform .2s ease-in-out;
-    border-radius: .25em;
+    transition: transform 0.2s ease-in-out;
+    border-radius: 0.25em;
     background-color: $line-color;
   }
 

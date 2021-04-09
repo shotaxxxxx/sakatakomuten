@@ -50,10 +50,10 @@ $secondary-text-color: $md-blue-grey-500;
 //  Typeface
 //====================================
 
-$font-set-primary: "游ゴシック", "Yu Gothic", "游ゴシック体", "YuGothic", "ヒラギノ角ゴ Pro W3",
-  "Hiragino Kaku Gothic Pro", "Meiryo UI", "メイリオ", Meiryo, sans-serif;
+$font-set-primary: "游ゴシック", "Yu Gothic", "游ゴシック体", yugothic, "ヒラギノ角ゴ Pro W3",
+  "Hiragino Kaku Gothic Pro", "Meiryo UI", "メイリオ", meiryo, sans-serif;
 
 //====================================
 //  Easing
 //====================================
-$easing: cubic-bezier(.165, .84, .44, 1);
+$easing: cubic-bezier(0.165, 0.84, 0.44, 1);

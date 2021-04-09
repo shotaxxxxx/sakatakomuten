@@ -27,9 +27,9 @@ $right: 0;
   height: 120%;
   padding: 3em 0 0;
   transform: translateX($translate);
-  transition: transform .3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
   background-color: $main-color;
-  box-shadow: $shadow-position 0 4px rgba(0, 0, 0, .16);
+  box-shadow: $shadow-position 0 4px rgba(0, 0, 0, 0.16);
 }
 
 .is-drawerActive .p-globalNav {

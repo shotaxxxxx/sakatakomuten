@@ -133,7 +133,7 @@ html {
 body {
   min-height: 100%;
   font: 1em/1.5 $font-set-primary;
-  letter-spacing: .05em;
+  letter-spacing: 0.05em;
   text-rendering: optimizeLegibility;
   -webkit-overflow-scrolling: touch;
   font-feature-settings: "palt";
@@ -210,23 +210,23 @@ mark {
 }
 
 small {
-  font-size: .8em;
+  font-size: 0.8em;
 }
 
 sub,
 sup {
   position: relative;
-  font-size: .75em;
+  font-size: 0.75em;
   line-height: 0;
   vertical-align: baseline;
 }
 
 sub {
-  bottom: -.25em;
+  bottom: -0.25em;
 }
 
 sup {
-  top: -.5em;
+  top: -0.5em;
 }
 
 /*
