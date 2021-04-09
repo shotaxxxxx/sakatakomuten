@@ -3,20 +3,14 @@
     "browser": true,
     "es2021": true
   },
-  "plugins": [
-    "prettier"
-  ],
-  "extends": [
-    "eslint:recommended",
-    "plugin:prettier/recommended"
-  ],
+  "plugins": ["prettier"],
+  "extends": ["eslint:recommended", "plugin:prettier/recommended"],
   "parser": "babel-eslint",
   "parserOptions": {
-    // "ecmaVersion": 2017,
     "sourceType": "module"
   },
   "globals": {
-    "jQuery": "readonly", //  writable
+    "jQuery": "readonly",
     "$": "readonly"
   },
   "rules": {
