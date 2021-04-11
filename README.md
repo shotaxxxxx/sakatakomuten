@@ -23,7 +23,7 @@ version1.0 では、webpack は JavaScript のバンドルとトランスパイ�
 ### HTML（Pug）
 
 静的サイトは、純粋に HTML を書く方法と Pug を使う方法で開発できます。
-pug を開発用にコンパイルする時には、`Pretter` による整形を行い、
+pug を開発用にコンパイルする時には、`Prettier` による整形を行い、
 本番環境用にコンパイルする場合は、HTML、Pug ともに minify 化されます。
 
 ### CSS（Sass / Scss）
@@ -36,7 +36,7 @@ CSS は通常の CSS や Sass/Scss での記述が可能です。
 - `Css Declaration Sorter` によるプロパティの並び順の調整（`SMACSS` の順）
 - `CSS MQPacker` による メディアクエリの最適化(複数のメディアクエリをまとめる)
 
-フォーマットやルールの管理は、`Pretter`と `Stylelint`を使っています。
+フォーマットやルールの管理は、`Prettier`と `Stylelint`を使っています。
 自動でルールの修正できるものは自動で行い、修正できないコードがあればエラーを出力します。
 
 なお、開発用にコンパイルする際は、ソースマップを出力し、
@@ -60,7 +60,7 @@ TypeScript の場合は、`core-js`、`regenerator-runtime`を直接 `import` �
 - GSAP
 - object-fit-images
 
-フォーマットやルールの管理は、`Pretter`と `Stylelint`を使っています。
+フォーマットやルールの管理は、`Prettier`と `Stylelint`を使っています。
 自動でルールの修正できるものは自動で行い、修正できないコードがあればエラーを出力します。
 
 なお、開発用にコンパイルする際は、ソースマップを出力し、
@@ -226,7 +226,7 @@ orelop-cli
 │
 ├ .eslintrc.json
 ├ .gitignore
-├ .prettierrc.json
+├ .Prettierrc.json
 ├ .stylelintrc.json
 │
 ├ babel.config.js
@@ -417,12 +417,12 @@ CSS を開発する場合は、`src/assets/css` フォルダ内で開発して�
 
 保存したり、新規のファイルを作成するとディレクトリの構造を保ったまま、 `public/assets/css`フォルダ内に保存されます。
 
-その際、`PostCSS` や、`Pretter`、`Stylelint`を用いて、以下のような中間処理を行います。
+その際、`PostCSS` や、`Prettier`、`Stylelint`を用いて、以下のような中間処理を行います。
 
 - `Autoprefixer` によるベンダープレフィックス自動付加（対応ブラウザは `Autoprefixer` の `default`）
 - `Css Declaration Sorter` によるプロパティの並び順の調整（`SMACSS` の順）
 - `CSS MQPacker` による メディアクエリの最適化(複数のメディアクエリをまとめる)
-- `Pretter` によるフォーマットとルールのチェック
+- `Prettier` によるフォーマットとルールのチェック
 - `Stylelint` によるルールのチェック（修正できるものは自動修正）
 
 ## Sass/Scss の開発
@@ -447,12 +447,12 @@ Sass/Scss で開発する場合は、`src/assets/sass` フォルダ内で、開�
 
 scss は、ファイルを保存したり、新規のファイルを作成すると `public/assets/css`フォルダ内に`css` をコンパイルします。
 
-その際、`PostCSS` や、`Pretter`、`Stylelint`を用いて、以下のような中間処理を行います。
+その際、`PostCSS` や、`Prettier`、`Stylelint`を用いて、以下のような中間処理を行います。
 
 - `Autoprefixer` によるベンダープレフィックス自動付加（対応ブラウザは `Autoprefixer` の `default`）
 - `Css Declaration Sorter` によるプロパティの並び順の調整（`SMACSS` の順）
 - `CSS MQPacker` による メディアクエリの最適化(複数のメディアクエリをまとめる)
-- `Pretter` によるフォーマットとルールのチェック
+- `Prettier` によるフォーマットとルールのチェック
 - `Stylelint` によるルールのチェック（修正できるものは自動修正）
 
 また、開発時のデバックを行いやすいように、ソースマップも `public/assets/css`フォルダに出力します。
@@ -496,7 +496,7 @@ JavaScript は、ファイルを保存したり、新規のファイルを作成
 その際、`babel`や、`Prettier`、`ESlint`を用いて、以下のような中間処理を行います。
 
 - `babel`、`core-js`、`regenerator-runtime` による ES5 へのトランスパイルとポリフィルの設定
-- `Pretter` によるフォーマットとルールのチェック
+- `Prettier` によるフォーマットとルールのチェック
 - `Stylelint` によるルールのチェック（修正できるものは自動修正）
 
 また、開発時のデバックを行いやすいように、ソースマップも `public/assets/js`フォルダに出力します。
@@ -550,7 +550,7 @@ TypeScript は、ファイルを保存したり、新規のファイルを作成
 その際、`babel`や、`Prettier`、`ESlint`を用いて、以下のような中間処理を行います。
 
 - `tsconfig.json`、`core-js`、`regenerator-runtime` に基づいて ES5 へのトランスパイル
-- `Pretter` によるフォーマットとルールのチェック
+- `Prettier` によるフォーマットとルールのチェック
 - `Stylelint` によるルールのチェック（修正できるものは自動修正）
 
 また、開発時のデバックを行いやすいように、ソースマップも `public/assets/js`フォルダに出力します。
