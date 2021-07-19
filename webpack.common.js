@@ -3,9 +3,7 @@ const globule = require("globule");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
-const ImageminWebpWebpackPlugin = require("imagemin-webp-webpack-plugin");
-const ImageminPlugin = require("imagemin-webpack-plugin").default;
-const ImageminMozjpeg = require("imagemin-mozjpeg");
+
 const StyleLintPlugin = require("stylelint-webpack-plugin");
 const BrowserSyncPlugin = require("browser-sync-webpack-plugin");
 
@@ -19,6 +17,7 @@ const dir = {
 };
 
 const settings = {
+  pug: true,
   sass: true,
   ts: false,
   php: false,
@@ -42,21 +41,26 @@ if (settings.sass) {
 // Pug の設定
 // ==============================================
 const templates = [];
-const documents = globule.find([`./${dir.src}/html/**/*.html`, `./${dir.src}/pug/**/*.pug`], {
-  ignore: [`./${dir.src}/html/**/_*.html`, `./${dir.src}/pug/**/_*.pug`],
-});
+if (settings.pug) {
+  const documents = globule.find([`./${dir.src}/html/**/*.html`, `./${dir.src}/pug/**/*.pug`], {
+    ignore: [`./${dir.src}/html/**/_*.html`, `./${dir.src}/pug/**/_*.pug`],
+  });
 
-documents.forEach((document) => {
-  const fileName = document.replace(`./${dir.src}/pug/`, "").replace(`./${dir.src}/html/`, "").replace(".pug", ".html");
-  templates.push(
-    new HtmlWebpackPlugin({
-      filename: `${fileName}`,
-      template: document,
-      inject: false,
-      minify: false,
-    })
-  );
-});
+  documents.forEach((document) => {
+    const fileName = document
+      .replace(`./${dir.src}/pug/`, "")
+      .replace(`./${dir.src}/html/`, "")
+      .replace(".pug", ".html");
+    templates.push(
+      new HtmlWebpackPlugin({
+        filename: `${fileName}`,
+        template: document,
+        inject: false,
+        minify: false,
+      })
+    );
+  });
+}
 
 // ==============================================
 // BrowserSync の設定
@@ -188,7 +192,27 @@ module.exports = {
           noErrorOnMissing: true,
         },
         {
-          from: "*.{txt, json, xml, png, icon}",
+          from: "*.txt",
+          context: `${dir.src}/`,
+          noErrorOnMissing: true,
+        },
+        {
+          from: "*.json",
+          context: `${dir.src}/`,
+          noErrorOnMissing: true,
+        },
+        {
+          from: "*.xml",
+          context: `${dir.src}/`,
+          noErrorOnMissing: true,
+        },
+        {
+          from: "*.png",
+          context: `${dir.src}/`,
+          noErrorOnMissing: true,
+        },
+        {
+          from: "*.icon",
           context: `${dir.src}/`,
           noErrorOnMissing: true,
         },
@@ -197,38 +221,14 @@ module.exports = {
           context: `${dir.src}/`,
           noErrorOnMissing: true,
         },
-      ],
-    }),
-    new ImageminPlugin({
-      test: /\.(jpe?g|png|gif|svg)$/i,
-      pngquant: {
-        quality: "95-100",
-      },
-      gifsicle: {
-        interlaced: false,
-        optimizationLevel: 1,
-        colors: 256,
-      },
-      svgo: {},
-      plugins: [
-        ImageminMozjpeg({
-          quality: 85,
-          progressive: true,
-        }),
-      ],
-    }),
-    new ImageminWebpWebpackPlugin({
-      config: [
         {
-          test: /\.(jpe?g|png)$/i,
-          options: {
-            quality: 75,
-          },
+          from: "style.css",
+          context: `${dir.src}/`,
+          noErrorOnMissing: true,
         },
       ],
-      detailedLogs: true,
-      overrideExtension: false, // 拡張子の変換を行わない
     }),
+
     new StyleLintPlugin({
       fix: true, // 自動修正可能なものは修正
       // failOnError: true, //エラー検出時にビルド中断

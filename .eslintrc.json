@@ -11,7 +11,8 @@
   },
   "globals": {
     "jQuery": "readonly",
-    "$": "readonly"
+    "$": "readonly",
+    "dataLayer": false
   },
   "rules": {
     "prettier/prettier": "error",
