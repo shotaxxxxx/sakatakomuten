@@ -434,7 +434,7 @@ Sass/Scss で開発する場合は、`src/assets/sass` フォルダ内で、開�
 なお、予め FLOCSS の設計を元にした、ディレクトリを用意していますが、必要に応じて変更してもらって構いません。
 また、予め 俺流の reset.css「Oreset.css」（`foundation/_oreset.scss`）や俺流フレキシブル CSS グリッドシステム「Olex 2.0」（`component/_grid.scss`）、俺流スクロールエフェクトの「Oreroll」（`component/_inview.scss`）も用意しています。
 
-`scss` のインポートは、`glob` よる読み込みが可能です。
+`scss` のインポートは、`@use` を使って各ディレクトリの`index.scss`に読み込んで下さい。
 
 ### 読み込みのサンプル
 
