@@ -10,6 +10,8 @@ export default class Toggle {
       overlay: false,
       relation: false,
       activeClass: false,
+      focusOut: false,
+      label: false,
     };
     this.options = Object.assign(this.defaultOptions, options);
 
@@ -52,11 +54,23 @@ export default class Toggle {
     const isExpanded = e.currentTarget.getAttribute("aria-expanded") !== "false";
     e.currentTarget.setAttribute("aria-expanded", !isExpanded);
 
+    // activeのクラス名
     if (this.options.activeClass) {
       const activeClass = e.currentTarget.getAttribute("data-active");
 
       this.DOM.target = document.querySelector(activeClass);
       this.objectName = activeClass.substring(1);
+    }
+
+    // フォーカスを外す
+    if (this.options.focusOut) {
+      e.currentTarget.blur();
+    }
+
+    // ラベルの付け替え
+    if (this.options.label) {
+      const label = isExpanded ? this.options.label.open : this.options.label.close;
+      e.currentTarget.querySelector(this.options.label.el).innerText = label;
     }
 
     this.DOM.target.classList.toggle(`is-${this.objectName}Active`);

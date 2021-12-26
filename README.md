@@ -1,4 +1,4 @@
-# Orelop CLI 2.0
+# Orelop CLI 2.1
 
 俺の Web サイト制作開発環境
 Ore no Web Develop Command Line Interface 略して「Orelop CLI」です。
@@ -739,3 +739,23 @@ yarn run prod
 あとは、`public`フォルダ内のデータをデプロイして頂ければと思います。
 
 `.heaccess`や `humans.txt`は必要に応じてアップロードして下さい。
+
+### デプロイ
+
+GitHub Actions を使った自動デプロイ環境を利用できます。
+
+`.github/workflows/deploy.yml` を開き、すべてのコメントになっている箇所を有効にし、
+「LOCAL_DIR」と「REMOTE_DIR」を環境に合わせて変更して下さい。
+
+また、GitHub リポジトリの「settings」の「secrets」、「actions」から「New repository secret」をクリックして、下記のように FTP の情報を登録して下さい。
+
+Name：FTP_SERVER
+Value：ホスト名（サーバ名）
+
+Name：FTP_USERNAME
+Value：FTP ユーザー名
+
+Name：FTP_PASSWORD
+Value：FTP パスワード
+
+main ブランチに push すると、自動的に本番環境にビルドし「LOCAL_DIR」で指定したファイルが、「REMOTE_DIR」で指定したディレクトリ内にアップロードされます。

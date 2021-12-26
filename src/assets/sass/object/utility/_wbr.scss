@@ -1,4 +1,7 @@
 @charset 'UTF-8';
+@use "sass:math";
+@use "../../global" as *;
+
 /*
   wbr
 */
@@ -13,6 +16,9 @@
       }
       &.-#{$device}Reset {
         display: inline;
+      }
+      &.-#{$device}NoWrap {
+        white-space: nowrap;
       }
     }
   }

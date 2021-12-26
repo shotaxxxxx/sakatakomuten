@@ -3,9 +3,8 @@
 @use "../../global" as *;
 
 /*
-  Hero
+  Heading
 */
-.p-hero {
-  $this: &;
-  position: relative;
+.c-heading {
+  display: block;
 }

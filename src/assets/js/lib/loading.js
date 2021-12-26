@@ -48,34 +48,7 @@ export default class Loading {
   _loaded() {
     setTimeout(() => {
       this.targetElem.classList.add("is-start");
-
-      setTimeout(() => {
-        this.targetElem.classList.add("is-scene-01");
-
-        setTimeout(() => {
-          this.targetElem.classList.add("is-scene-02");
-
-          setTimeout(() => {
-            this.targetElem.classList.add("is-scene-03");
-
-            setTimeout(() => {
-              this.targetElem.classList.add("is-scene-04");
-
-              setTimeout(() => {
-                this.targetElem.classList.add("is-finish");
-                this.targetElem.classList.remove(
-                  "is-start",
-                  "is-scene-01",
-                  "is-scene-02",
-                  "is-scene-03",
-                  "is-scene-04"
-                );
-              }, 300);
-            }, 500);
-          }, 300);
-        }, 500);
-      }, 300);
-    }, 300);
+    }, 1600);
   }
 
   _checkIos() {

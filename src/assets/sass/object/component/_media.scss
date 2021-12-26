@@ -1,4 +1,6 @@
 @charset 'UTF-8';
+@use "sass:math";
+@use "../../global" as *;
 /*
   Media
 */
@@ -14,14 +16,14 @@
     display: flex;
     flex-direction: column;
     order: 1;
-    width: percentage(512px/ 776px);
+    width: percentage(math.div(512px, 776px));
   }
 
   &__thumbnail {
     position: relative;
     flex-shrink: 0;
 
-    width: percentage(248px/ 776px);
+    width: percentage(math.div(248px, 776px));
   }
 
   &__figure {

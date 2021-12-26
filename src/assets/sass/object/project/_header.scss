@@ -3,9 +3,10 @@
 @use "../../global" as *;
 
 /*
-  Hero
+  Header
 */
-.p-hero {
-  $this: &;
-  position: relative;
+.p-header {
+  &__inner {
+    display: flex;
+  }
 }

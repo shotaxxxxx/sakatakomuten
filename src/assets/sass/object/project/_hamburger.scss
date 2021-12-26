@@ -1,37 +1,27 @@
 @charset 'UTF-8';
+@use "sass:math";
+@use "../../global" as *;
 /*
   Hamburger
 */
-$position: right;
-$line-color: $primary-text-color;
-$active-line-color: #fff;
-
-// setting
-$right: 2.5%;
-$left: auto;
-@if $position == left {
-  $right: auto;
-  $left: 2.5%;
-}
-
 .p-hamburger {
-  position: absolute;
-  z-index: 2;
-  top: 0;
-  right: $right;
-  bottom: 0;
-  left: $left;
-  width: 24px;
-  height: 24px;
-  margin: auto 0;
-  transition: all 0.3s ease-in-out;
-  border: 0;
-  outline: 0;
-  background-color: transparent;
-  box-shadow: 0 0 40px transparent;
+  $this: &;
+  position: fixed;
 
-  &:focus {
-    box-shadow: 0 0 0 1px #212121;
+  z-index: 4;
+  top: 0;
+  right: 5%;
+  width: 40px;
+  height: 40px;
+  margin: auto;
+  transition-property: transform;
+  transition-duration: 0.6s;
+  transition-timing-function: $easing;
+  border: 0;
+  text-align: center;
+
+  @include mq(lg) {
+    display: none;
   }
 
   &__line {
@@ -41,12 +31,15 @@ $left: auto;
     right: 0;
     bottom: 0;
     left: 0;
-    width: 75%;
-    height: 2px;
+    width: 24px;
+    height: 3px;
     margin: auto;
-    transition: transform 0.2s ease-in-out;
-    border-radius: 0.25em;
-    background-color: $line-color;
+    transition-property: transform, background-color, opacity, transform-origin;
+    transition-duration: $duration;
+    transition-timing-function: $easing;
+
+    border-radius: 1em;
+    background-color: $primary-text-color;
   }
 
   &__line:before,
@@ -56,21 +49,39 @@ $left: auto;
     position: absolute;
     width: 100%;
     height: 100%;
+
     transition: inherit;
     border-radius: inherit;
     background-color: inherit;
   }
 
   &__line:before {
-    top: -5px;
+    transform: translate3d(0, -8px, 0);
   }
 
   &__line:after {
-    top: 5px;
+    transform: translate3d(0, 8px, 0);
   }
 
-  @include mq(tab) {
-    display: none;
+  &__label {
+    display: inline-block;
+    position: absolute;
+    top: 24px;
+    right: 0;
+    left: 0;
+    font-size: pxToRem(10px);
+  }
+
+  &:hover,
+  &:focus {
+    #{$this}__line {
+      &::before {
+        transform: translate3d(40%, -175%, 0) rotate(45deg) scaleX(0.5);
+      }
+      &::after {
+        transform: translate3d(40%, 175%, 0) rotate(-45deg) scaleX(0.5);
+      }
+    }
   }
 
   .is-drawerActive & {
@@ -79,8 +90,8 @@ $left: auto;
 
       &:before,
       &:after {
-        top: 0;
-        background-color: $active-line-color;
+        transform: translate3d(0, 0, 0);
+        background-color: $primary-text-color;
       }
 
       &:before {
@@ -88,6 +99,26 @@ $left: auto;
       }
       &:after {
         transform: rotate(45deg);
+      }
+    }
+
+    &:hover,
+    &:focus {
+      #{$this}__line {
+        background-color: $primary-text-color;
+
+        &::before,
+        &::after {
+          // transform-origin: 0% 50%;
+          transition-property: transform, background-color, opacity, transform-origin;
+          // transition-property: transform;
+        }
+        &::before {
+          transform: translate3d(-40%, -175%, 0) rotate(-45deg) scaleX(0.5);
+        }
+        &::after {
+          transform: translate3d(-40%, 175%, 0) rotate(45deg) scaleX(0.5);
+        }
       }
     }
   }

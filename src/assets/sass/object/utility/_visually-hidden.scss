@@ -1,8 +1,11 @@
 @charset 'UTF-8';
+@use "sass:math";
+@use "../../global" as *;
+
 /*
   Visually Hidden
 */
-.u-visuallyHidden {
+.u-visuallyHidden:not(:focus) {
   position: absolute;
   width: 1px;
   height: 1px;
