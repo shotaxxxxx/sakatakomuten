@@ -6,22 +6,26 @@
   Define List
 */
 .c-defineList {
-  // display: flex;
-  // flex-direction: column;
-  &__item {
-    &.-holzontal {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      padding: 0.75rem 0;
+  $this: &;
 
-      &:first-child {
-        padding-top: 0;
+  @each $device, $breakpoint in $breakpoints {
+    @include mq($device) {
+      &[data-type~="#{$device}:vertical"] {
+        #{$this}__item {
+          display: block;
+        }
+      }
+      &[data-type~="#{$device}:holzontal"] {
+        #{$this}__item {
+          display: flex;
+        }
       }
     }
+  }
 
-    &.-line {
-      border-bottom: 1px solid $primary-border-color;
-    }
+  &__term,
+  &__description {
+    margin: 0;
+    padding: 0;
   }
 }
