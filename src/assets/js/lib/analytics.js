@@ -4,6 +4,6 @@ export default (function () {
   //   dataLayer.push(arguments);
   // }
   // gtag("js", new Date());
-  // gtag("config", "UA-133359802-29");
-  // gtag("config", "G-8J2YTZGBE9");
+  // gtag("config", "UA-xxxxxxx");
+  // gtag("config", "G-xxxxxxxx");
 })();

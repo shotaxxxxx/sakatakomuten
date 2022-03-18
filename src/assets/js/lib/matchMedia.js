@@ -5,7 +5,7 @@ export default (breakPoint) => {
   handle(mediaQuery);
 
   // ウィンドウサイズが変更されても実行されるように
-  mediaQuery.addListener(handle);
+  mediaQuery.addEventListener("change", handle);
 
   function handle(mq) {
     if (mq.matches) {
