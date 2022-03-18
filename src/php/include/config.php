@@ -6,6 +6,7 @@
 
    // SNS設定
   define('TWITTER', '【twitterのアカウント名】');
+  define('INSTAGRAM', '【INSTAGRAMのアカウント名】');
 
   // OGP & Schema
   define('COMPANY_NAME', '【会社名】');

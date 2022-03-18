@@ -1,0 +1,45 @@
+version: "3"
+
+services:
+  wordpress:
+    depends_on:
+      - mysql
+    image: wordpress:latest
+    ports:
+      - "8080:80"
+    volumes:
+      - ./config/php/php.ini:/usr/local/etc/php/php.ini
+      - ./public/wp-content:/var/www/html/wp-content
+
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: mysql
+      WORDPRESS_DB_USER: wp_user # MYSQL_USERと同じ
+      WORDPRESS_DB_PASSWORD: wp_pass # MYSQL_PASSWORDと同じ
+      WORDPRESS_DB_NAME: wordpress # MYSQL_DATABASEと同じ
+
+  mysql:
+    build: ./config/mysql
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wp_user
+      MYSQL_PASSWORD: wp_pass
+      MYSQL_ROOT_PASSWORD: root_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./config/mysql/mysql_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    ports:
+      - 8888:80
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mysql
+      - PMA_USER=wp_user
+      - PMA_PASSWORD=wp_pass
+    depends_on:
+      - mysql
+volumes:
+  mysql_data:
