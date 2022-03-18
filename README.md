@@ -1,4 +1,4 @@
-# Orelop CLI 2.1
+# Orelop CLI 2.1.1
 
 俺の Web サイト制作開発環境
 Ore no Web Develop Command Line Interface 略して「Orelop CLI」です。
@@ -79,6 +79,9 @@ PHP + MySQL を開発することも可能です。
 - phpMyAdmin
 
 なお、開発時は `BrawserSync` による自動リロードも可能です。
+
+
+
 
 ### 画像
 
@@ -182,7 +185,10 @@ orelop-cli
 │　│ │
 │　│ ├ sass
 │　│ │ ├ foundation
-│　│ │ ├ inc
+│　│ │ ├ global
+│　│ │ │ ├ function
+│　│ │ │ ├ mixin
+│　│ │ │ └ settings
 │　│ │ ├ layout
 │　│ │ ├ object
 │　│ │ │ ├ component
@@ -205,7 +211,8 @@ orelop-cli
 │　│ │ ├ config.php
 │　│ │ ├ footer.php
 │　│ │ ├ functions.php
-│　│ │ └ header.php
+│　│ │ ├ header.php
+│　│ │ └ include.php
 │　│ └ index.php
 │　│
 │　├ pug
@@ -224,6 +231,7 @@ orelop-cli
 │　├ .htaccess
 │　└ humans.txt
 │
+├ .eslintignore
 ├ .eslintrc.json
 ├ .gitignore
 ├ .Prettierrc.json
@@ -432,18 +440,35 @@ Sass/Scss で開発する場合は、`src/assets/sass` フォルダ内で、開�
 インポート元の sass ファイルはデフォルトでは、`common.scss` としています。
 
 なお、予め FLOCSS の設計を元にした、ディレクトリを用意していますが、必要に応じて変更してもらって構いません。
-また、予め 俺流の reset.css「Oreset.css」（`foundation/_oreset.scss`）や俺流フレキシブル CSS グリッドシステム「Olex 2.0」（`component/_grid.scss`）、俺流スクロールエフェクトの「Oreroll」（`component/_inview.scss`）も用意しています。
+また、予め 俺流の reset.css「Oreset.css」（`foundation/_oreset.scss`）や俺流フレキシブル CSS グリッドシステム「Olex 2.0」（`layout/_grid.scss`）、俺流スクロールエフェクトの「Oreroll」（`component/_inview.scss`）も用意しています。
 
-`scss` のインポートは、`@use` を使って各ディレクトリの`index.scss`に読み込んで下さい。
+`scss` のインポートは、`@use` を使って各ディレクトリの`_index.scss`に読み込んで下さい。
 
 ### 読み込みのサンプル
-
+コンポーネントのsassを作成
 ```sass:common.scss
-@import "layout/*";
-@import "object/compornent/*";
+// sass/object/project/_logo.scss
+@charset 'UTF-8';
+@use "sass:math";
+@use "../../global" as *;
+
+/*
+  Logo
+*/
+.p-logo {
+  // ロゴのスタイル
+}
+
 ```
 
-「`*`」を用いることで、そのディレクト内にある全ての scss ファイルを自動で読み込むことができます。
+ディレクトリ内の「_index.scss」に @use で読み込み
+```sass:common.scss
+// sass/object/project/_index.scss
+@use "logo";
+@use "hero";
+```
+
+
 
 scss は、ファイルを保存したり、新規のファイルを作成すると `public/assets/css`フォルダ内に`css` をコンパイルします。
 
@@ -653,6 +678,16 @@ docker-comporse down
 docker rmi ［imageのID］
 ```
 
+
+#### WordPressの場合
+WordPressを利用するには、`docker-comporse.yml` にある、「LAMP環境用」の設定をすべて削除し、「WordPress用」のコメントをすべて取り除くことでWordPressによる開発環境が作れます。
+
+WordPressは `/public` フォルダ内に `wp-content` フォルダ以下の構成のみがマウントされるようにしています。
+
+
+従って開発前に `webpack.common.js` の「dist」フォルダのパスと `package.json` の「creanup」のスクリプトのパスを WordPressで作成するテーマフォルダまでのパスに変更する必要があります。
+
+
 ## MySQL の開発
 
 Docker で環境を作った場合は、デフォルトで `docker_db` というデータベースをひとつ作ってあります。
@@ -744,8 +779,11 @@ yarn run prod
 
 GitHub Actions を使った自動デプロイ環境を利用できます。
 
-`.github/workflows/deploy.yml` を開き、すべてのコメントになっている箇所を有効にし、
-「LOCAL_DIR」と「REMOTE_DIR」を環境に合わせて変更して下さい。
+自動デプロイ環境を利用するにはまず、`.github` フォルダ内の `_workflows` を `workflows` にリネームします（「_」を削除するだけ）
+
+
+`.github/workflows/deploy.yml` を開き、
+「local-dir」と「server-dir」を環境に合わせて変更して下さい。
 
 また、GitHub リポジトリの「settings」の「secrets」、「actions」から「New repository secret」をクリックして、下記のように FTP の情報を登録して下さい。
 
@@ -758,4 +796,4 @@ Value：FTP ユーザー名
 Name：FTP_PASSWORD
 Value：FTP パスワード
 
-main ブランチに push すると、自動的に本番環境にビルドし「LOCAL_DIR」で指定したファイルが、「REMOTE_DIR」で指定したディレクトリ内にアップロードされます。
+これで、`main` ブランチに `push` すると、自動的に本番環境にビルドされ、、ビルドに成功すると「local-dir」で指定したファイルが、「server-dir」で指定したディレクトリ内にアップロードされます。
