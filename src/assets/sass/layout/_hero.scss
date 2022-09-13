@@ -1,0 +1,36 @@
+@charset 'UTF-8';
+@use "sass:math";
+@use "../global" as *;
+/*
+  Hero
+-----------------------------------------------------*/
+
+.l-hero {
+  width: 89.3334%;
+  max-width: $content-width;
+  margin: 0 auto;
+
+  // @include mq("sm") {
+  //   width: 65vw;
+  // }
+
+  // @include mq("md") {
+  //   width: 83vw;
+  // }
+
+  // @include mq(lg) {
+  //   width: 80vw;
+  // }
+
+  // @include mq(xl) {
+  //   width: 93vw;
+  // }
+
+  // @include mq(xxl) {
+  //   width: 88vw;
+  // }
+
+  @include mq(xl) {
+    width: 72.2222%;
+  }
+}

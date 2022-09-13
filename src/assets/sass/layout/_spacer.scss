@@ -69,7 +69,7 @@
           padding: pxToRem($val) 0;
         }
 
-        &[class][data-space~="#{$device}:#{$size}Top"] {
+        &[data-space~="#{$device}:#{$size}Top"] {
           padding-top: pxToRem($val);
         }
 
@@ -106,5 +106,28 @@
 
   &.-overflow {
     overflow: hidden;
+  }
+
+  &.-bgWork {
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 9%;
+      width: 75%;
+      height: 59%;
+      background-color: $secondary-text-color;
+
+      @include mq(xl) {
+        width: 68%;
+        height: 57.427%;
+      }
+    }
+  }
+
+  &.-bgContact {
+    background-color: $secondary-text-color;
   }
 }

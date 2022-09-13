@@ -25,4 +25,13 @@
       display: none;
     }
   }
+
+  &.-sm {
+    @include mq(sm) {
+      display: inline-block;
+    }
+    @include mq(md) {
+      display: none;
+    }
+  }
 }

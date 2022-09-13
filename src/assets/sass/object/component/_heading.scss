@@ -7,4 +7,38 @@
 */
 .c-heading {
   display: block;
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1;
+  text-align: center;
+
+  @include mq(lg) {
+    font-size: 1.75rem;
+  }
+
+  @include mq(xl) {
+    font-size: 2rem;
+  }
+
+  &__caption {
+    display: block;
+    position: relative;
+    padding-bottom: 15px;
+    font-size: 0.875rem;
+
+    @include mq(xl) {
+      font-size: 1rem;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 64px;
+      height: 1px;
+      transform: translateX(-50%);
+      background-color: $sub-color;
+    }
+  }
 }

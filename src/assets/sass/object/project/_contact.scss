@@ -1,0 +1,78 @@
+@charset 'UTF-8';
+@use "sass:math";
+@use "../../global" as *;
+
+/*
+  Contact
+*/
+.p-contact {
+  position: relative;
+  padding-top: 32px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid $primary-text-color;
+
+  @include mq(lg) {
+    padding-top: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 0;
+      width: 1px;
+      height: 191px;
+      transform: translateY(-50%);
+      background-color: $primary-text-color;
+    }
+
+    &:last-child {
+      &::after {
+        display: none;
+      }
+    }
+  }
+
+  &:first-child {
+    padding-top: 0;
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &__item {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+
+    @include mq(lg) {
+      flex-direction: column;
+    }
+  }
+
+  &__title {
+    font-size: 1rem;
+    font-weight: 400;
+    text-align: center;
+
+    @include mq(lg) {
+      margin-top: 18px;
+      margin-bottom: 23px;
+      font-size: 1.25rem;
+    }
+  }
+
+  &__text {
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+
+  &__subtext {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.75rem;
+    font-weight: 400;
+  }
+}

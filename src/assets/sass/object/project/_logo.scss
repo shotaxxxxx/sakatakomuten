@@ -7,4 +7,10 @@
 */
 .p-logo {
   $this: &;
+  display: inline-block;
+
+  img {
+    width: 114px;
+    height: 29px;
+  }
 }

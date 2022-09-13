@@ -8,4 +8,80 @@
 .p-hero {
   $this: &;
   position: relative;
+
+  &__image {
+    display: block;
+    > img {
+      width: 100%;
+      height: 100vh;
+      object-fit: cover;
+
+      @include mq("lg") {
+        height: auto;
+      }
+    }
+  }
+
+  &__body {
+    display: block;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    transform: translateY(-50%);
+  }
+
+  &__copy {
+    position: relative;
+    max-width: 900px;
+    padding-bottom: 15px;
+    color: $base-color;
+    font-size: 2.5rem;
+    font-weight: 500;
+    line-height: 1.4;
+    text-shadow: 0 0 4px $primary-text-color;
+
+    &::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background-color: $base-color;
+      box-shadow: 0 0 4px $primary-text-color;
+    }
+
+    @include mq(md) {
+      width: 80vw;
+    }
+
+    @include mq(lg) {
+      width: 70vw;
+      font-size: 3rem;
+    }
+
+    @include mq(xl) {
+      font-size: 3.5rem;
+    }
+
+    @include mq(xxl) {
+      width: 62vw;
+    }
+  }
+
+  &__subcopy {
+    display: block;
+    margin-top: 16px;
+    font-size: 1.5rem;
+    line-height: 1.66667;
+
+    @include mq(lg) {
+      font-size: 1.75rem;
+    }
+
+    @include mq(xl) {
+      font-size: 2.25rem;
+    }
+  }
 }

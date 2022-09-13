@@ -6,4 +6,14 @@
 -----------------------------------------------------*/
 .l-footer {
   clear: both;
+
+  &__info {
+    padding-top: 20px;
+    padding-bottom: 12px;
+
+    @include mq(lg) {
+      padding-top: 11px;
+      padding-bottom: 11px;
+    }
+  }
 }

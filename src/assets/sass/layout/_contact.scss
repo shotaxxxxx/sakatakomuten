@@ -1,0 +1,17 @@
+@charset 'UTF-8';
+@use "sass:math";
+@use "../global" as *;
+
+/*
+  Contact
+-----------------------------------------------------*/
+.l-contact {
+  @include mq(sm) {
+    width: 500px;
+    margin: 0 auto;
+  }
+
+  @include mq(lg) {
+    width: 900px;
+  }
+}

@@ -6,7 +6,11 @@
   Container
 -----------------------------------------------------*/
 .l-container {
-  width: 90%;
+  width: 89.3334%;
   max-width: $content-width;
   margin: 0 auto;
+
+  @include mq(xl) {
+    width: 72.2222%;
+  }
 }
