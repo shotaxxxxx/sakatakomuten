@@ -191,12 +191,12 @@ body {
     }
     .is-loaded & {
       visibility: hidden;
-      transform: translate3d(-5%, 0, 0) scale3d(0, 1, 1);
+      // transform: translate3d(-5%, 0, 0) scale3d(0, 1, 1);
       transform-origin: left center;
       transition-property: transform, visibility;
       transition-duration: 0.8s, 0.1s;
       transition-timing-function: $easing-cut;
-      transition-delay: 0.5s, 1.5s;
+      // transition-delay: 0.5s, 1.5s;
       pointer-events: none;
       will-change: transform;
     }
